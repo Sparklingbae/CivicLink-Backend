@@ -1,7 +1,6 @@
 import express from "express";
 import {
   registerUser,
-  login,
   getCurrentUser,
   updateCurrentUser,
   getUsers,
@@ -16,7 +15,6 @@ import { authMiddleware } from "./middleware";
 const router = express.Router();
 
 router.post("/register", registerUserValidator, registerUser);
-router.post("/login", loginValidator, login);
 router.get("/me", authMiddleware, getCurrentUser);
 router.put("/me", authMiddleware, updateUserValidator, updateCurrentUser);
 
