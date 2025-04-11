@@ -1,5 +1,16 @@
 import express from "express";
-import * as controllers from "./controllers";
+import {
+    registerOfficial,
+    // getOfficialById,
+    // getAllOfficials,
+    // getOfficialsByState,
+    // getOfficialsByLocalGovernment,
+    // getOfficialByLevel,
+    // getOfficialsByTitlePaginated,
+    // updateOfficial,
+    // deleteOfficial,
+
+} from "./controllers"
 import { createOfficialValidator } from "./validator";
 import { authMiddleware } from "../user/middleware";
 
@@ -7,55 +18,55 @@ const router = express.Router();
 
 // POST route
 router.post(
-    "/register",
+    "/official/register",
     authMiddleware,
     createOfficialValidator,
-    controllers.registerOfficial
+    registerOfficial
 );
 
 // Fixed static routes first (most specific to less specific)
-router.get(
-    "/all",
-    controllers.getAllOfficials
-);
+// router.get(
+//     "/all",
+//     getAllOfficials
+// );
 
-router.get(
-    "/levels/:id",
-    controllers.getOfficialByLevel
-);
+// router.get(
+//     "/levels/:id",
+//     getOfficialByLevel
+// );
 
-router.get(
-    "/state/:state",
-    controllers.getOfficialsByState
-);
+// router.get(
+//     "/state/:state",
+//     getOfficialsByState
+// );
 
-router.get(
-    "/lga/:localGovernment",
-    controllers.getOfficialsByLocalGovernment
-);
+// router.get(
+//     "/lga/:localGovernment",
+//     getOfficialsByLocalGovernment
+// );
 
-router.get(
-    "/title/:title",
-    controllers.getOfficialsByTitlePaginated
-);
+// router.get(
+//     "/title/:title",
+//     getOfficialsByTitlePaginated
+// );
 
-// Parameterized routes last
-router.get(
-    "/:id",
-    controllers.getOfficialById
-);
+// // Parameterized routes last
+// router.get(
+//     "/:id",
+//     getOfficialById
+// );
 
-router.put(
-    "/:id",
-    authMiddleware,
-    createOfficialValidator,
-    controllers.updateOfficial
-);
+// router.put(
+//     "/:id",
+//     authMiddleware,
+//     createOfficialValidator,
+//     updateOfficial
+// );
 
-router.delete(
-    "/:id",
-    authMiddleware,
-    controllers.deleteOfficial
-);
+// router.delete(
+//     "/:id",
+//     authMiddleware,
+//     deleteOfficial
+// );
 
 export default router;
