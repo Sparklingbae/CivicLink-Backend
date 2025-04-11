@@ -1,4 +1,5 @@
-import { OfficialDocument } from "./interfaces";
+import { OfficialDocument , Title} from "./interfaces";
+
 import mongoose, { Schema, model } from "mongoose";
 
 const officialSchema = new Schema<OfficialDocument>(
@@ -12,6 +13,7 @@ const officialSchema = new Schema<OfficialDocument>(
         },
         title: {
             type: String,
+            enum: Object.values(Title),
             required: true,
             trim: true,
             maxlength: 50,

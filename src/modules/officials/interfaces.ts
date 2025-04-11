@@ -12,26 +12,71 @@ export interface Location {
     localGovernment: string;
 }
 
-export enum TitleName {
+export enum Title {
+    // Federal Executive
     President = 'President',
     VicePresident = 'Vice President',
-    Senator = 'Senator',
+    SecretaryToTheGovernment = 'Secretary to the Government of the Federation',
+    HeadOfService = 'Head of Civil Service of the Federation',
     Minister = 'Minister',
-    Commissioner = 'Commissioner',
+    SpecialAdviser = 'Special Adviser',
+    SeniorSpecialAssistant = 'Senior Special Assistant',
+    SpecialAssistant = 'Special Assistant',
+  
+    // Federal Legislature
+    Senator = 'Senator',
+    HouseOfRepMember = 'House of Representatives Member',
+    SpeakerHouseOfReps = 'Speaker of the House of Representatives',
+    SenatePresident = 'Senate President',
+    DeputySenatePresident = 'Deputy Senate President',
+  
+    // State Executive
+    Governor = 'Governor',
+    DeputyGovernor = 'Deputy Governor',
+    StateCommissioner = 'Commissioner',
+    SecretaryToStateGovernment = 'Secretary to the State Government',
+    HeadOfServiceState = 'Head of Civil Service (State)',
+    SpecialAdviserState = 'State Special Adviser',
+    SpecialAssistantState = 'State Special Assistant',
+  
+    // State Legislature
+    StateAssemblyMember = 'State House of Assembly Member',
+    SpeakerStateAssembly = 'Speaker of the State House of Assembly',
+  
+    // Local Government
+    LocalGovernmentChairman = 'Local Government Chairman',
+    LocalGovernmentViceChairman = 'Local Government Vice Chairman',
+    Councillor = 'Councillor',
+  
+    // Judiciary
+    ChiefJustice = 'Chief Justice of Nigeria',
+    Justice = 'Justice',
+    Judge = 'Judge',
+    Magistrate = 'Magistrate',
+    AttorneyGeneral = 'Attorney General',
+  
+    // Traditional & Ceremonial
+    Emir = 'Emir',
+    Oba = 'Oba',
+    Obi = 'Obi',
+    Igwe = 'Igwe',
+    Sultan = 'Sultan',
+    Chancellor = 'Chancellor',
+  
+    // General/Other
     Chairman = 'Chairman',
     Honorable = 'Honorable',
-    Chancellor = 'Chancellor'
+    DirectorGeneral = 'Director General',
+    PermanentSecretary = 'Permanent Secretary',
+    Director = 'Director',
+    Coordinator = 'Coordinator',
 }
-
-export interface Title {
-    name: TitleName; // Predefined titles
-    customTitle?: string; // Optional field for additional titles if needed
-}
+  
 
 export interface Official {
     _id: ObjectId;
     name: string;
-    title: Title;
+    title: Title | string; // Use Title enum or string for flexibility
     level: ObjectId; // Reference to Government Level
     ministry?: string; // Optional ministry field
     responsibility_area: string;
