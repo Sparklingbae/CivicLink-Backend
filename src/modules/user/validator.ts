@@ -41,6 +41,7 @@ export const updateUserValidator = (
     firstName: Joi.string().optional(),
     lastName: Joi.string().optional(),
     location: Joi.string().optional(),
+    role: Joi.string().valid("user", "admin").optional(),
   });
 
   const { error } = schema.validate(req.body);
@@ -69,6 +70,7 @@ export const registerUserValidator = (
       "string.min": "Password must be at least 6 characters long",
       "any.required": "Password is required",
     }),
+    role: Joi.string().valid("user", "admin").optional(),
   });
 
   const { error } = schema.validate(req.body);
