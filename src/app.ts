@@ -23,6 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 // CORS Middleware
 app.use(cors(corsOptions));
 
+// Logging Middleware
+app.use(loggerMiddleware);
+
 // Health Check Route
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({ status: 'ok', message: 'API is running' });
@@ -34,17 +37,13 @@ app.use("/api/auth", authRouter);
 app.use("/api/levels", levelsRouter);
 app.use("/api/officials", officialsRouter);
 
-
-// // Handle undefined routes
+// Handle undefined routes
 app.all('*"catch_all"', (req: Request, res: Response, next: NextFunction) => {
     next(new NotFoundError(`Cannot find ${req.originalUrl} on this server`));
 });
-  
 
 // Global error handler
 app.use(errorHandler);
 
-// Logging Middleware
-app.use(loggerMiddleware);
-
 export default app;
+

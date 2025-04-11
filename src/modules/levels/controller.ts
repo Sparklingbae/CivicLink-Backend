@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import LevelModel from "./models";
 import { NotFoundError, BadRequestError, ForbiddenError } from '../../utilities/errorClasses';
 import { ILevelDocument,ILevelResponse,ILevelRequest } from "./interfaces";
+import mongoose from "mongoose";
 
 
 export const createLevel = async (req: Request, res: Response): Promise<void> => {
@@ -77,14 +78,14 @@ export const updateLevel = async (req: Request, res: Response): Promise<void> =>
         if (!req.user || req.user.role !== "admin") {
             throw new ForbiddenError("You are not authorized to update a level");
         }
-
+        const levelId= new mongoose.Types.ObjectId(id);
         // Check if level already exists
         const existing = await LevelModel.findOne({level: levelData.level });
         if (existing) {
             throw new BadRequestError("Level already exists");
         }
 
-        const updatedLevel = await LevelModel.findByIdAndUpdate(id, { levelData}, { new: true });
+        const updatedLevel = await LevelModel.findByIdAndUpdate(levelId, { levelData}, { new: true });
         if (!updatedLevel) {
             throw new NotFoundError("Level not found");
         }
@@ -107,8 +108,8 @@ export const deleteLevel = async (req: Request, res: Response): Promise<void> =>
         if (!req.user || req.user.role !== "admin") {
             throw new ForbiddenError("You are not authorized to delete a level");
         }
-
-        const level = await LevelModel.findByIdAndDelete(id);
+        const levelId= new mongoose.Types.ObjectId(id);
+        const level = await LevelModel.findByIdAndDelete(levelId);
         if (!level) {
             throw new NotFoundError("Level not found");
         }

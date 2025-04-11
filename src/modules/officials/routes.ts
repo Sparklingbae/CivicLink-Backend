@@ -18,7 +18,7 @@ const router = express.Router();
 
 // POST route
 router.post(
-    "/official/register",
+    "/register",
     authMiddleware,
     createOfficialValidator,
     registerOfficial
