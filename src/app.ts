@@ -35,8 +35,8 @@ app.use("/api/levels", levelsRouter);
 app.use("/api/officials", officialsRouter);
 
 
-// Handle undefined routes
-app.all('*', (req: Request, res: Response, next: NextFunction) => {
+// // Handle undefined routes
+app.all('*"catch_all"', (req: Request, res: Response, next: NextFunction) => {
     next(new NotFoundError(`Cannot find ${req.originalUrl} on this server`));
 });
   

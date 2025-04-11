@@ -1,14 +1,14 @@
 import express from "express";
 import {
     registerOfficial,
-    // getOfficialById,
-    // getAllOfficials,
-    // getOfficialsByState,
-    // getOfficialsByLocalGovernment,
-    // getOfficialByLevel,
-    // getOfficialsByTitlePaginated,
-    // updateOfficial,
-    // deleteOfficial,
+    getOfficialById,
+    getAllOfficials,
+    getOfficialsByState,
+    getOfficialsByLocalGovernment,
+    getOfficialByLevel,
+    getOfficialsByTitlePaginated,
+    updateOfficial,
+    deleteOfficial,
 
 } from "./controllers"
 import { createOfficialValidator } from "./validator";
@@ -25,48 +25,48 @@ router.post(
 );
 
 // Fixed static routes first (most specific to less specific)
-// router.get(
-//     "/all",
-//     getAllOfficials
-// );
+router.get(
+    "/all",
+    getAllOfficials
+);
 
-// router.get(
-//     "/levels/:id",
-//     getOfficialByLevel
-// );
+router.get(
+    "/levels/:id",
+    getOfficialByLevel
+);
 
-// router.get(
-//     "/state/:state",
-//     getOfficialsByState
-// );
+router.get(
+    "/state/:state",
+    getOfficialsByState
+);
 
-// router.get(
-//     "/lga/:localGovernment",
-//     getOfficialsByLocalGovernment
-// );
+router.get(
+    "/lga/:localGovernment",
+    getOfficialsByLocalGovernment
+);
 
-// router.get(
-//     "/title/:title",
-//     getOfficialsByTitlePaginated
-// );
+router.get(
+    "/title/:title",
+    getOfficialsByTitlePaginated
+);
 
-// // Parameterized routes last
-// router.get(
-//     "/:id",
-//     getOfficialById
-// );
+// Parameterized routes last
+router.get(
+    "/:id",
+    getOfficialById
+);
 
-// router.put(
-//     "/:id",
-//     authMiddleware,
-//     createOfficialValidator,
-//     updateOfficial
-// );
+router.put(
+    "/:id",
+    authMiddleware,
+    createOfficialValidator,
+    updateOfficial
+);
 
-// router.delete(
-//     "/:id",
-//     authMiddleware,
-//     deleteOfficial
-// );
+router.delete(
+    "/:id",
+    authMiddleware,
+    deleteOfficial
+);
 
 export default router;
