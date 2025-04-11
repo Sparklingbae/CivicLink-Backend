@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { BadRequestError } from '../../utilities/errorClasses';
 import {Title} from './interfaces';
 import Joi from 'joi';
 
@@ -25,7 +26,7 @@ export const createOfficialValidator = (req: Request, res: Response, next: NextF
     const { error } = schema.validate(req.body, { abortEarly: false });
   
     if (error) {
-      return res.status(400).json({ status: "fail", message: error.details[0].message });
+    throw new BadRequestError(error.details.map(detail => detail.message).join(', '));
     }
   
     next();

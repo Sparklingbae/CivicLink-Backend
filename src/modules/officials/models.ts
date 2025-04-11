@@ -1,5 +1,6 @@
 import { OfficialDocument , Title} from "./interfaces";
-
+import LevelModel from "../levels/models"
+import User from "../user/model"
 import mongoose, { Schema, model } from "mongoose";
 
 const officialSchema = new Schema<OfficialDocument>(
@@ -21,7 +22,7 @@ const officialSchema = new Schema<OfficialDocument>(
         },
         level: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "LevelModel",
+            ref: LevelModel.modelName, // Reference to the LevelModel
             required: true,
         },
         ministry: {
@@ -43,7 +44,7 @@ const officialSchema = new Schema<OfficialDocument>(
                 lowercase: true,
                 match:
                     /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/i, // Optional field
-                validate(value:string) {
+                validate(value: string) {
                     if (value && !this.contact_info.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
                         throw new Error("Invalid email format");
                     }
@@ -55,7 +56,7 @@ const officialSchema = new Schema<OfficialDocument>(
                 trim: true,
                 match:
                     /^(\+?\d{1,3}[- ]?)?\d{10}$/i, // Optional field
-                validate(value:string) {
+                validate(value: string) {
                     if (value && !this.contact_info.phone_number.match(/^(\+?\d{1,3}[- ]?)?\d{10}$/)) {
                         throw new Error("Invalid phone number format");
                     }
@@ -67,23 +68,23 @@ const officialSchema = new Schema<OfficialDocument>(
                 type: String,
                 required: true,
                 trim: true,
-                uppercase:true
+                uppercase: true,
             },
-            localGovernment:{
-                type:String
-            }
+            localGovernment: {
+                type: String,
+            },
         },
-        active_status:{
-          type:Boolean
+        active_status: {
+            type: Boolean,
         },
-        createdBy:{
-          type:mongoose.Schema.Types.ObjectId, 
-          ref:"User",
-          required:true
-        }
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: User.modelName, // Reference to the UserModel
+            required: true,
+        },
     },
     {
-        timestamps:true
+        timestamps: true,
     }
 );
 
