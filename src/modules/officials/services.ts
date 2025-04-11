@@ -54,7 +54,6 @@ export async function createOfficial(
 
 export async function getOfficialById(
     officialId: string,
-    userId: Types.ObjectId
 ): Promise<OfficialDocument | null> {
     const official = await OfficialModel.findById(officialId).populate("level").populate("createdBy").exec();
     if (!official) {

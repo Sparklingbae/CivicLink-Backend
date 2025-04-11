@@ -28,12 +28,8 @@ export const registerOfficial = async (req: Request, res: Response): Promise<voi
 export const getOfficialById = async (req: Request, res: Response): Promise<void> => {
     try {
         const officialId = req.params.id;
-        if (!req.user || !req.user._id) {
-            res.status(400).json({ message: "User information is missing in the request" });
-            return;
-        }
-        const userId = new mongoose.Types.ObjectId(req.user._id);
-        const official = await services.getOfficialById(officialId, userId);
+
+        const official = await services.getOfficialById(officialId);
         res.status(200).json({
             message: "Official retrieved successfully",
             official,
