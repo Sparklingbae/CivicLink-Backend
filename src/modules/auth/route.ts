@@ -1,9 +1,9 @@
-import { Router } from "express";
+import express from "express";
 import { login } from "./controller";
 import { loginValidator } from "./validator";
 
-const authRouter = Router();
+const router = express.Router();
 
-authRouter.post("/login", loginValidator ,login);
+router.post("/login", loginValidator ,login);
 
-export default authRouter;
+export default router;
