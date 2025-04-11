@@ -1,15 +1,15 @@
 import express from "express";
-import {createLevel,getLevel,getLevels,updateLevel,deleteLevel} from "./controller"
-import { authMiddleware } from "../auth/middleware";
-import {levelValidator}  from "./validator";
+import {createLevel, getLevel, getLevels, updateLevel, deleteLevel} from "./controller"
+import { authMiddleware } from "../user/middleware";
+import {levelValidator} from "./validator";
 
 const router = express.Router();
 
-router.post("/levels",authMiddleware, levelValidator,createLevel);
-router.get("/levels/:id", getLevel);
-router.get("/levels", getLevels);
-router.put("/levels/:id", authMiddleware, levelValidator, updateLevel);
-router.delete("/levels/:id", authMiddleware, deleteLevel);  
-
+// Remove the redundant "/levels" prefix from all routes
+router.post("/", authMiddleware, levelValidator, createLevel);
+router.get("/", getLevels);  // Get all levels route should come before parameterized routes
+router.get("/:id", getLevel);
+router.put("/:id", authMiddleware, levelValidator, updateLevel);
+router.delete("/:id", authMiddleware, deleteLevel);  
 
 export default router;

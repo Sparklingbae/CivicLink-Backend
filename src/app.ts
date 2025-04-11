@@ -23,17 +23,17 @@ app.use(express.urlencoded({ extended: true }));
 // CORS Middleware
 app.use(cors(corsOptions));
 
+// Health Check Route
+app.get('/', (req: Request, res: Response) => {
+    res.status(200).json({ status: 'ok', message: 'API is running' });
+});
+
 // API Routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/levels", levelsRouter);
 app.use("/api/officials", officialsRouter);
 
-
-// Health Check Route
-app.get('/', (req: Request, res: Response) => {
-    res.status(200).json({ status: 'ok', message: 'API is running' });
-});
 
 // Handle undefined routes
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

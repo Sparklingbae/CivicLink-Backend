@@ -1,12 +1,17 @@
 import { Request, Response } from "express"
 import * as services from "./services";
+import mongoose from "mongoose";
 
 
 
 export const registerOfficial = async (req: Request, res: Response): Promise<void> => {
     try {
         const officialData = req.body;
-        const userId = req.user._id; // Assuming user ID is available in request object
+        if (!req.user || !req.user._id) {
+            res.status(400).json({ message: "User information is missing in the request" });
+            return;
+        }
+        const userId = new mongoose.Types.ObjectId(req.user._id);
         const official = await services.createOfficial(officialData, userId);
         res.status(201).json({
             message: "Official created successfully",
@@ -23,7 +28,11 @@ export const registerOfficial = async (req: Request, res: Response): Promise<voi
 export const getOfficialById = async (req: Request, res: Response): Promise<void> => {
     try {
         const officialId = req.params.id;
-        const userId = req.user._id; // Assuming user ID is available in request object
+        if (!req.user || !req.user._id) {
+            res.status(400).json({ message: "User information is missing in the request" });
+            return;
+        }
+        const userId = new mongoose.Types.ObjectId(req.user._id);
         const official = await services.getOfficialById(officialId, userId);
         res.status(200).json({
             message: "Official retrieved successfully",
@@ -66,7 +75,11 @@ export const updateOfficial = async (req: Request, res: Response): Promise<void>
     try {
         const officialId = req.params.id;
         const officialData = req.body;
-        const userId = req.user._id; // Assuming user ID is available in request object
+        if (!req.user || !req.user._id) {
+            res.status(400).json({ message: "User information is missing in the request" });
+            return;
+        }
+        const userId = new mongoose.Types.ObjectId(req.user._id);
         const updatedOfficial = await services.updateOfficial(officialId, officialData, userId);
         res.status(200).json({
             message: "Official updated successfully",
@@ -83,7 +96,11 @@ export const updateOfficial = async (req: Request, res: Response): Promise<void>
 export const deleteOfficial = async (req: Request, res: Response): Promise<void> => {
     try {
         const officialId = req.params.id;
-        const userId = req.user._id; // Assuming user ID is available in request object
+        if (!req.user || !req.user._id) {
+            res.status(400).json({ message: "User information is missing in the request" });
+            return;
+        }
+        const userId = new mongoose.Types.ObjectId(req.user._id);
         await services.deleteOfficial(officialId, userId);
         res.status(200).json({
             message: "Official deleted successfully",

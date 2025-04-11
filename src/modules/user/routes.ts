@@ -10,7 +10,7 @@ import {
   updateUserValidator,
   registerUserValidator,
 } from "./validator";
-import { authMiddleware } from "../auth/middleware";
+import { authMiddleware } from "./middleware";
 
 const router = express.Router();
 
