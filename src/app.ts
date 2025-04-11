@@ -6,6 +6,8 @@ import { corsOptions } from './config/cors';
 import { loggerMiddleware } from './middleware';
 import { errorHandler } from './utilities/errorMiddleware';
 import { NotFoundError } from './utilities/errorClasses';
+import levelsRouter from './modules/levels/routes';
+import officialsRouter from './modules/officials/routes';
 import userRouter from './modules/user/routes';
 import authRouter from './modules/auth/route';
 
@@ -24,6 +26,8 @@ app.use(cors(corsOptions));
 // API Routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/levels", levelsRouter);
+app.use("/api/officials", officialsRouter);
 
 
 // Health Check Route

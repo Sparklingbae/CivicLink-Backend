@@ -2,8 +2,7 @@ import mongoose  from "mongoose";
 
 export interface ILevel {
     _id: string;
-    name: string;
-    description?: string;
+    level: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -11,13 +10,15 @@ export interface ILevel {
 
 export interface ILevelDocument extends mongoose.Document {
     _id: mongoose.Types.ObjectId; // Override _id to match mongoose.Document
-    name: string;
-    description?: string;
+    level: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
 
+export interface ILevelRequest {
+    level: string;
+}
+
 export interface ILevelResponse {
-    name: string;
-    description?: string;
+    level: string;
 }

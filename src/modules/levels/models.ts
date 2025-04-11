@@ -1,22 +1,15 @@
 import mongoose, { Schema, model } from "mongoose";
-import bcrypt from "bcrypt";
 import { ILevelDocument } from "./interfaces";
 
 const levelSchema = new Schema<ILevelDocument>(
     {
-        name: {
+        level: {
         type: String,
         required: true,
         unique: true,
         trim: true,
         maxlength: 50,
         minlength: 3,
-        },
-        description: {
-        type: String,
-        trim: true,
-        maxlength: 500,
-        minlength: 10,
         },
     },
     {
