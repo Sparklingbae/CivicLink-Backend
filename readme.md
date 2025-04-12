@@ -93,12 +93,19 @@ To ensure type-safe usage of `process.env`, environment variables are typed in `
 ## ✅ Status
 
 Initial backend scaffold complete and ready for feature development. Includes:
+
 - Type-safe setup
 - MongoDB connection
 - Monolithic modular structure
 - Environment management
 
 ---
+
+## Scripts
+
+A script for admin to add officials data from an excel file (xls, xlsx).
+
+___
 
 ## 🤝 Contributing
 
@@ -113,9 +120,3 @@ Initial backend scaffold complete and ready for feature development. Includes:
 ## 📝 License
 
 [MIT](LICENSE)
-```
-
----
-
-**a.** Add `README` badges (CI, coverage, license) for polish  
-**b.** Include sample API request using `curl` or Postman for developer onboarding

@@ -11,7 +11,7 @@ import {
     deleteOfficial,
 
 } from "./controllers"
-import { createOfficialValidator } from "./validator";
+import { createOfficialValidator, updateOfficialValidator } from "./validator";
 import { authMiddleware } from "../user/middleware";
 
 const router = express.Router();
@@ -59,7 +59,7 @@ router.get(
 router.put(
     "/:id",
     authMiddleware,
-    createOfficialValidator,
+    updateOfficialValidator,
     updateOfficial
 );
 
